@@ -1,3 +1,4 @@
+<%@ page import="by.akimova.TP_lab_servlet.FirstServlet" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -8,13 +9,15 @@
     <title>Calculate</title>
 </head>
 <body>
-<h1><%= "Вариант 1" %>
+<h1 class="text-center"><%= "Вариант 1" %>
+<h1 class="text-center"><%= "3ИТ-7 Акимова Анастасия" %>
 </h1>
 <h1>
-    <div>Welcome to Calculator App</div>
+    <div class="text-center"><%= "Welcome to Calculator App" %></div>
 </h1>
 <br/>
-<form method="post" action="/FirstServlet">
+<form method="post" action="${pageContext.request.contextPath}/CalculateServlet">
+    <fieldset>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -37,17 +40,13 @@
         </div>
     </div>
 </div>
-<div>
-    <button value="calculate" type="submit" class="btn btn-primary btn-lg">Calculate</button>
+<div class="text-center">
+    <button value="calculate" type="submit" class="btn btn-success btn-lg text-center">Calculate</button>
 </div>
-<div>
-    <input  name="result" class="form-control" type="text" placeholder="Answer here " aria-label="readonly input example" readonly>
-</div>
-
-    <p>Ответ : ${!empty(error)?err:result}</p>
-
+</fieldset>
 </form>
 
+<h1 class="text-center">${!empty(error)?err:str}</h1>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

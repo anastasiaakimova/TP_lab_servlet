@@ -9,11 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
-@WebServlet("/FirstServlet")
+@WebServlet("/CalculateServlet")
 public class FirstServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("src/webapp/index.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     @Override
@@ -29,20 +29,26 @@ public class FirstServlet extends HttpServlet {
             double a1 = Double.parseDouble(num1);  // конвертируем строку в double
             double a2 = Double.parseDouble(num2);
 
+String str = new String("");
+
             try {
             char parameters = request.getParameter("parameters").charAt(0); // получаем map по input c формы, в котором name - ключ, value - значение
             switch(parameters) {
                 case '+':
                     result =  a1 + a2;
+                    str = new String(a1 + "+" + a2 + "=" + result);
                     break;
                 case '-':
                     result =  a1 - a2;
+                    str = new String(a1 + "-" + a2 + "=" + result);
                     break;
                 case '*':
                     result =  a1 * a2;
+                    str = new String(a1 + "*" + a2 + "=" + result);
                     break;
                 case '/':
                     result =  a1 / a2;
+                    str = new String(a1 + "/" + a2 + "=" + result);
                     break;
             }
         }
@@ -50,48 +56,10 @@ public class FirstServlet extends HttpServlet {
             error = "Деление на ноль запрещено";
         }
         request.setAttribute("result", Double.toString(result));
+        request.setAttribute("str", (str));
         request.setAttribute("error", error);
         this.doGet(request, response);
     }
-
-
-
-//            if (parameters.containsKey("+")) {           // проверяем какое действие было выполнено
-//                result = a1+a2;
-//            } else if (parameters.containsKey("-")) {
-//                result = a1-a2;
-//            } else if (parameters.containsKey("*")) {
-//                result = a1*a2;
-//            } else if (parameters.containsKey("/")) {
-//                result = a1/a2;
-//            }
-//            messageResult = String.valueOf((double) result);            // если все ок, конвертируем результат операции в строку и присваиваем messageResult
-//        } else {
-//            messageResult = "Одно из чисел не было введено. Пожалуйста, попробуйте снова."; // если не введено одно из чисел для вычисления, в messageResult записывается текст ошибки
-//        }
-//        response(response, messageResult); // запускаем метод response для вывода формы с результатом
-
-
-
-//            switch (command) {
-//            case "+":
-//                result = num1 + num2;
-//                operation = "+";
-//                break;
-//            case "-":
-//                result = num1 - num2;
-//                operation = "-";
-//                break;
-//            case "*":
-//                result = num1 * num2;
-//                operation = "*";
-//                break;
-//            case "/":
-//                result = num1 / num2;
-//                operation = "/";
-//                break;
-//        }
-//        String action = String.format("%d %s %d = %d", num1, operation, num2, result);
 
         }
     }
