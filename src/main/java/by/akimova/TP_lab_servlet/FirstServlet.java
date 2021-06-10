@@ -21,7 +21,7 @@ public class FirstServlet extends HttpServlet {
         double result = 0;
         String error = "";
 
-    //    String messageResult;                                   // строка результата
+
         String num1 = request.getParameter("num1"); //получаем первое число для операции
         String num2 = request.getParameter("num2"); //получаем второе число для операции
 
@@ -29,37 +29,36 @@ public class FirstServlet extends HttpServlet {
             double a1 = Double.parseDouble(num1);  // конвертируем строку в double
             double a2 = Double.parseDouble(num2);
 
-String str = new String("");
+            String str = new String("");
 
             try {
-            char parameters = request.getParameter("parameters").charAt(0); // получаем map по input c формы, в котором name - ключ, value - значение
-            switch(parameters) {
-                case '+':
-                    result =  a1 + a2;
-                    str = new String(a1 + "+" + a2 + "=" + result);
-                    break;
-                case '-':
-                    result =  a1 - a2;
-                    str = new String(a1 + "-" + a2 + "=" + result);
-                    break;
-                case '*':
-                    result =  a1 * a2;
-                    str = new String(a1 + "*" + a2 + "=" + result);
-                    break;
-                case '/':
-                    result =  a1 / a2;
-                    str = new String(a1 + "/" + a2 + "=" + result);
-                    break;
+                char parameters = request.getParameter("parameters").charAt(0); // получаем символ по input c формы, в котором name - ключ, value - значение
+                switch (parameters) {
+                    case '+':
+                        result = a1 + a2;
+                        str = new String(a1 + "+" + a2 + "=" + result);
+                        break;
+                    case '-':
+                        result = a1 - a2;
+                        str = new String(a1 + "-" + a2 + "=" + result);
+                        break;
+                    case '*':
+                        result = a1 * a2;
+                        str = new String(a1 + "*" + a2 + "=" + result);
+                        break;
+                    case '/':
+                        result = a1 / a2;
+                        str = new String(a1 + "/" + a2 + "=" + result);
+                        break;
+                }
+            } catch (ArithmeticException e) {
+                error = "Деление на ноль запрещено";
             }
+            request.setAttribute("result", Double.toString(result));
+            request.setAttribute("str", (str));
+            request.setAttribute("error", error);
+            this.doGet(request, response);
         }
-		catch(ArithmeticException e) {
-            error = "Деление на ноль запрещено";
-        }
-        request.setAttribute("result", Double.toString(result));
-        request.setAttribute("str", (str));
-        request.setAttribute("error", error);
-        this.doGet(request, response);
-    }
 
-        }
     }
+}
