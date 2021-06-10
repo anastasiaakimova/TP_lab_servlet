@@ -44,7 +44,7 @@
     <input  name="result" class="form-control" type="text" placeholder="Answer here " aria-label="readonly input example" readonly>
 </div>
 
-    <p>Le résultat est : ${!empty(error)?err:result}</p>
+    <p>Ответ : ${!empty(error)?err:result}</p>
 
 </form>
 

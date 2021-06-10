@@ -47,12 +47,8 @@ public class FirstServlet extends HttpServlet {
             }
         }
 		catch(ArithmeticException e) {
-            error = "La division par zéro est interdite";
+            error = "Деление на ноль запрещено";
         }
-		catch(Exception e) {
-            error = "Vous n'avez probablement  pas effectué les opérations sur des entiers";
-        }
-
         request.setAttribute("result", Double.toString(result));
         request.setAttribute("error", error);
         this.doGet(request, response);
